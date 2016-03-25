@@ -14,17 +14,17 @@ TreeNode::TreeNode(DBentry* _entryPtr){
 TreeNode::~TreeNode(){
     
 	if(entryPtr != NULL){
-    	delete entryPtr;
+    		delete entryPtr;
 	}
 	entryPtr = NULL;
     
 	if(left != NULL){
-    	delete left;
+    		delete left;
 	}
 	left = NULL;
     
 	if(right != NULL){
-    	delete right;
+    		delete right;
 	}
 	right = NULL;
     
@@ -56,53 +56,53 @@ bool TreeNode::insertNode(TreeNode* &root, DBentry* newEntry){
     	//go left
     	if(left != NULL)
         	left->insertNode(left, newEntry);
-    	else{
-        	TreeNode* newNode = new TreeNode(newEntry);
-        	root->setLeft(newNode);
-        	return true;
-        	//////////////////
-        	delete newNode;
-    	}
+	    	else{
+	        	TreeNode* newNode = new TreeNode(newEntry);
+	        	root->setLeft(newNode);
+	        	return true;
+	        	//////////////////
+	        	delete newNode;
+	    	}
 	}
 	else if((root->getEntry()->getName()) < newEntry->getName()){
     	//go right
     	if(right != NULL)
         	right->insertNode(right, newEntry);
-    	else{
-        	TreeNode* newNode = new TreeNode(newEntry);
-        	root->setRight(newNode);
-        	return true;
-        	//////////////////
-        	delete newNode;
-    	}
+	    	else{
+	        	TreeNode* newNode = new TreeNode(newEntry);
+	        	root->setRight(newNode);
+	        	return true;
+	        	//////////////////
+	        	delete newNode;
+	    	}
 	}
 	else{
-    	//already exists
-    	return false;
+	    	//already exists
+	    	return false;
 	}
 }
 
 DBentry* TreeNode::searchNode(TreeNode* root, string name){
     
 	if((root->getEntry()->getName()) == name){
-    	//found it
-    	return (root->getEntry());
+	    	//found it
+	    	return (root->getEntry());
 	}
     
     
 	if((root->getEntry()->getName()) > name){
-    	//go left
-    	if(left != NULL)
-        	return(left->searchNode(left, name));
-    	else
-        	return NULL;
+	    	//go left
+	    	if(left != NULL)
+	        	return(left->searchNode(left, name));
+	    	else
+	        	return NULL;
 	}
 	else if((root->getEntry()->getName()) < name){
-    	//go right
-    	if(right != NULL)
-        	return(right->searchNode(right, name));
-    	else
-        	return NULL;
+	    	//go right
+	    	if(right != NULL)
+	        	return(right->searchNode(right, name));
+	    	else
+	        	return NULL;
 	}
     
 }
@@ -110,48 +110,48 @@ DBentry* TreeNode::searchNode(TreeNode* root, string name){
 TreeNode* TreeNode::findMax(){
     
 	if(this->right!=NULL){
-    	this->right->findMax();
+    		this->right->findMax();
 	}
 	else{
-    	return(this);
+    		return(this);
 	}
 }
 
 bool TreeNode::removeNode(TreeNode* &root, string name){
     
 	if((root->getEntry()->getName()) > name){
-    	if(left!=NULL){
-        	left->removeNode(left, name);
-    	}
-    	return false; //couldn't find him
+	    	if(left!=NULL){
+	        	left->removeNode(left, name);
+	    	}
+    		return false; //couldn't find him
 	}
 	else if((root->getEntry()->getName()) < name){
-    	if(right!=NULL){
-        	right->removeNode(right, name);
-    	}
-    	return false;
+	    	if(right!=NULL){
+	        	right->removeNode(right, name);
+	    	}
+	    	return false;
 	}
 
 	//we found the key
 	if(left==NULL && right==NULL){
-    	//it is a leaf
-    	root = NULL;
-    	this->deleteNode();
-    	return true;
+	    	//it is a leaf
+	    	root = NULL;
+	    	this->deleteNode();
+	    	return true;
 	}
 	if(left==NULL && right!=NULL){
-    	//it has only one child
-    	root=right;
-    	this->deleteNode();
-    	return true;
-    	right=NULL;
+	    	//it has only one child
+	    	root=right;
+	    	this->deleteNode();
+	    	return true;
+	    	right=NULL;
 	}
 	if(left!=NULL && right==NULL){
-    	//it has only one child
-    	root=left;
-    	this->deleteNode();
-    	return true;
-    	left=NULL;
+	    	//it has only one child
+	    	root=left;
+	    	this->deleteNode();
+	    	return true;
+	    	left=NULL;
 	}
 
 	//it has two child
@@ -177,45 +177,45 @@ int TreeNode::countActive(TreeNode* root){
 	int countRight=0, countLeft=0;
     
 	if(left!=NULL){
-    	countLeft=left->countActive(left);
+    		countLeft=left->countActive(left);
 	}
 	if(right!=NULL){
-    	countRight=right->countActive(right);
+    		countRight=right->countActive(right);
 	}
     
 	if(this->getEntry()->getActive())
-    	return (1+countRight+countLeft);
+    		return (1+countRight+countLeft);
 	else
-    	return(countRight+countLeft);
+    		return(countRight+countLeft);
 }
 
 void TreeNode::printProbesNode(TreeNode* root, string name, int count){
     
 	if((root->getEntry()->getName()) == name){
-    	cout<<count<<endl;
-    	return;
+	    	cout<<count<<endl;
+	    	return;
 	}
 	else if((root->getEntry()->getName()) > name){
-    	//go left
-    	count++; //we used a probe
-    	if(left!=NULL){
-        	left->printProbesNode(left, name, count);
-    	}else{
-        	//couldn't find him
-        	cout<<"Error: entry does not exist"<<endl;
-        	return;
-    	}	 
+	    	//go left
+	    	count++; //we used a probe
+	    	if(left!=NULL){
+	        	left->printProbesNode(left, name, count);
+	    	}else{
+	        	//couldn't find him
+	        	cout<<"Error: entry does not exist"<<endl;
+	        	return;
+	    	}	 
 	}
 	else if((root->getEntry()->getName()) < name){
-    	//go right
-    	count++; //we used a probe
-    	if(right!=NULL){
-        	right->printProbesNode(right, name,count);
-    	}else{
-        	//couldn't find him
-        	cout<<"Error: entry does not exist"<<endl;
-        	return;
-    	}
+	    	//go right
+	    	count++; //we used a probe
+	    	if(right!=NULL){
+	        	right->printProbesNode(right, name,count);
+	    	}else{
+	        	//couldn't find him
+	        	cout<<"Error: entry does not exist"<<endl;
+	        	return;
+	    	}
 	}
 }
 
@@ -229,12 +229,12 @@ void TreeNode::clearNodes(TreeNode* &root){
 void TreeNode::printNodes(){
     
 	if(left!=NULL)
-    	left->printNodes();
+    		left->printNodes();
     
 	this->getEntry()->print();
     
 	if(right!=NULL)
-    	right->printNodes();
+    		right->printNodes();
     
 }
 
@@ -250,9 +250,8 @@ void TreeNode::copyDBentry(DBentry* newEntry){
 void TreeNode::deleteNode(){
     
 	if(entryPtr!=NULL)
-    	delete entryPtr;
+    		delete entryPtr;
 	entryPtr=NULL;
-    
+	
 	return;
-    
 }
