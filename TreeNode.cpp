@@ -53,9 +53,9 @@ DBentry* TreeNode::getEntry() const{
 bool TreeNode::insertNode(TreeNode* &root, DBentry* newEntry){
     
 	if((root->getEntry()->getName()) > newEntry->getName()){
-    	//go left
-    	if(left != NULL)
-        	left->insertNode(left, newEntry);
+	    	//go left
+	    	if(left != NULL)
+	        	left->insertNode(left, newEntry);
 	    	else{
 	        	TreeNode* newNode = new TreeNode(newEntry);
 	        	root->setLeft(newNode);
@@ -66,8 +66,8 @@ bool TreeNode::insertNode(TreeNode* &root, DBentry* newEntry){
 	}
 	else if((root->getEntry()->getName()) < newEntry->getName()){
     	//go right
-    	if(right != NULL)
-        	right->insertNode(right, newEntry);
+	    	if(right != NULL)
+	        	right->insertNode(right, newEntry);
 	    	else{
 	        	TreeNode* newNode = new TreeNode(newEntry);
 	        	root->setRight(newNode);
@@ -239,12 +239,11 @@ void TreeNode::printNodes(){
 }
 
 void TreeNode::copyDBentry(DBentry* newEntry){
-    
+	
 	this->getEntry()->setName(newEntry->getName());
 	this->getEntry()->setIPaddress(newEntry->getIPaddress());
 	this->getEntry()->setActive(newEntry->getActive());
 	return;
-    
 }
 
 void TreeNode::deleteNode(){
