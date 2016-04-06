@@ -43,9 +43,9 @@ bool DBentry::getActive() const{
 void DBentry::print(){
 	string activeValue;
 	if(this->active)
-    	activeValue = "active";
+    		activeValue = "active";
 	else
-    	activeValue = "inactive";
+    		activeValue = "inactive";
     
 	cout << name << " : " << IPaddress << " : " << activeValue << endl;
 }
